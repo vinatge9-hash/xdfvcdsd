@@ -1,0 +1,107 @@
+<!-- https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@600;700&display=swap -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Menu — Niyantri</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-color: #1f2937;
+      --secondary-color: #d4af37;
+      --text-color: #111827;
+      --heading-font: 'Montserrat', sans-serif;
+      --body-font: 'Inter', sans-serif;
+    }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); }
+    body { font-family: var(--body-font); color: var(--text-color); }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-gray-50 font-[var(--body-font)]">
+  <header class="w-full flex items-center justify-between px-6 py-5 bg-[var(--primary-color)] text-white">
+    <a href="./index.html" class="flex items-center gap-3 no-underline text-white">
+      <div class="w-10 h-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center"><span class="text-[var(--primary-color)] font-[var(--heading-font)]">N</span></div>
+      <span class="font-[var(--heading-font)]">Niyantri</span>
+    </a>
+    <nav class="flex items-center gap-4">
+      <a href="./index.html" class="text-white/80 hover:text-white transition">Home</a>
+      <a href="./menu.html" class="text-white">Menu</a>
+      <a href="./contact.html" class="text-white/80 hover:text-white transition">Contact</a>
+      <a href="./cart.html" class="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md">Cart <span id="navCartCount" class="ml-1 text-sm font-medium bg-white/90 rounded-full px-2 py-0.5 text-[var(--primary-color)]">0</span></a>
+    </nav>
+  </header>
+
+  <main class="w-full px-6 py-10">
+    <h1 class="text-3xl font-[var(--heading-font)] mb-6">Menu</h1>
+    <p class="text-gray-600 mb-6">Curated espresso selections and craft beverages. Add to your cart and checkout with PayPay.</p>
+
+    <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <!-- Repeating menu items -->
+      <template id="menuItemTpl">
+        <article class="w-full bg-white rounded-xl overflow-hidden shadow hover:shadow-2xl transform transition hover:-translate-y-2">
+          <img class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-lg font-[var(--heading-font)] name"></h3>
+            <p class="text-sm text-gray-600 mt-2 desc"></p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-[var(--primary-color)] font-semibold price"></span>
+              <button class="add-to-cart px-4 py-2 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow">Add</button>
+            </div>
+          </div>
+        </article>
+      </template>
+
+    </div>
+  </main>
+
+  <footer class="w-full px-6 py-6 bg-[var(--primary-color)] text-white/80">
+    <div class="w-full flex items-center justify-between">
+      <div class="font-[var(--heading-font)]">Niyantri</div>
+      <div class="text-sm">Open daily • 7am - 7pm</div>
+    </div>
+  </footer>
+
+  <script>
+    // Menu data
+    const menu = [
+      {id:'espresso', name:'Espresso', price:3.5, desc:'Concentrated, bold, and perfectly pulled.', img:"https://images.unsplash.com/photo-1665823298079-90ec41903510?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHw3fHxhJTIwY2xvc2UtdXAlMjBlc3ByZXNzbyUyMHNob3QlMjBpbiUyMGElMjBzbWFsbCUyMGNlcmFtaWMlMjBjdXAlMjBvbiUyMGElMjB3b29kZW4lMjBzdXJmYWNlJTJDJTIwcmljaCUyMGNyZW1hfGVufDB8MHx8fDE3NTY1NTI2OTl8MA&ixlib=rb-4.1.0&q=80&w=1080"},
+      {id:'cappuccino', name:'Cappuccino', price:4.5, desc:'Silky steamed milk layered over robust espresso.', img:"https://images.unsplash.com/photo-1729179866543-ec17ffb7685d?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwxMHx8YSUyMGN1cCUyMG9mJTIwdmVsdmV0eSUyMGNhcHB1Y2Npbm8lMjB3aXRoJTIwZm9hbSUyMGFydCUyMG9uJTIwYSUyMGRhcmslMjB0YWJsZXxlbnwwfDB8fHwxNzU2NTUyNjk4fDA&ixlib=rb-4.1.0&q=80&w=1080"},
+      {id:'latte', name:'Latte', price:4.75, desc:'Smooth steamed milk with espresso — classic comfort.', img:"https://images.pexels.com/photos/9550567/pexels-photo-9550567.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"},
+      {id:'americano', name:'Americano', price:3.75, desc:'Espresso diluted with hot water for a longer cup.', img:"https://images.pexels.com/photos/4226806/pexels-photo-4226806.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"},
+      {id:'coldbrew', name:'Cold Brew', price:4.25, desc:'Slow-steeped for a smooth, low-acidity flavor.', img:"https://pixabay.com/get/g8f8655eacd8c626d73eabf9b45e0e343ea7085612c374a69d2214f489a8d30f3c14d67b5d1a28c9ee0c2cfb854c1acc9f1d5bbdcb5114cfcf0037fdcdef01df1_640.jpg"},
+      {id:'icedmocha', name:'Iced Mocha', price:5.25, desc:'Chocolatey and refreshing — espresso with milk and ice.', img:"https://images.pexels.com/photos/5060451/pexels-photo-5060451.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"},
+      {id:'vanillalatte', name:'Vanilla Latte', price:5.0, desc:'A touch of vanilla syrup for a sweet aromatic sip.', img:"https://images.pexels.com/photos/27636528/pexels-photo-27636528.jpeg?auto=compress&cs=tinysrgb&h=650&w=940"},
+      {id:'caramelmacchiato', name:'Caramel Macchiato', price:5.5, desc:'Vanilla and caramel layered over steamed milk and espresso.', img:"https://images.unsplash.com/photo-1576230071106-7dfef563bdc4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwxfHxhJTIwY2FyYW1lbCUyMG1hY2NoaWF0byUyMHdpdGglMjBjYXJhbWVsJTIwZHJpenpsZSUyMG9uJTIwdG9wfGVufDB8MHx8fDE3NTY1NTI3MDZ8MA&ixlib=rb-4.1.0&q=80&w=1080"}
+    ];
+
+    function getCart(){ return JSON.parse(localStorage.getItem('niyantri_cart')||'[]'); }
+    function setCart(c){ localStorage.setItem('niyantri_cart', JSON.stringify(c)); updateNavCount(); }
+    function updateNavCount(){ const c=getCart(); const count=c.reduce((s,i)=>s+i.qty,0); document.getElementById('navCartCount').textContent = count; }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      const grid = document.querySelector('main .grid');
+      const tpl = document.getElementById('menuItemTpl');
+      menu.forEach(item=>{
+        const node = tpl.content.cloneNode(true);
+        const art = node.querySelector('article');
+        const img = node.querySelector('img'); img.src = item.img; img.alt = item.name;
+        node.querySelector('.name').textContent = item.name;
+        node.querySelector('.desc').textContent = item.desc;
+        node.querySelector('.price').textContent = `$${item.price.toFixed(2)}`;
+        const btn = node.querySelector('.add-to-cart');
+        btn.dataset.id = item.id; btn.dataset.name = item.name; btn.dataset.price = item.price;
+        btn.addEventListener('click', ()=>{
+          const cart = getCart();
+          const found = cart.find(x=>x.id===item.id);
+          if(found) found.qty += 1; else cart.push({id:item.id,name:item.name,price:item.price,qty:1});
+          setCart(cart);
+          btn.classList.add('scale-95'); setTimeout(()=>btn.classList.remove('scale-95'),150);
+        });
+        grid.appendChild(node);
+      });
+      updateNavCount();
+    });
+  </script>
+</body>
+</html>
