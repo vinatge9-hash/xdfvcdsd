@@ -1,0 +1,72 @@
+<!-- https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@600;700&display=swap -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Contact — Niyantri</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-color: #1f2937;
+      --secondary-color: #d4af37;
+      --text-color: #111827;
+      --heading-font: 'Montserrat', sans-serif;
+      --body-font: 'Inter', sans-serif;
+    }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); }
+    body { font-family: var(--body-font); color: var(--text-color); }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-gray-50 font-[var(--body-font)]">
+  <header class="w-full flex items-center justify-between px-6 py-5 bg-[var(--primary-color)] text-white">
+    <a href="./index.html" class="flex items-center gap-3 no-underline text-white">
+      <div class="w-10 h-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center"><span class="text-[var(--primary-color)] font-[var(--heading-font)]">N</span></div>
+      <span class="font-[var(--heading-font)]">Niyantri</span>
+    </a>
+    <nav class="flex items-center gap-4">
+      <a href="./index.html" class="text-white/80 hover:text-white transition">Home</a>
+      <a href="./menu.html" class="text-white/80 hover:text-white transition">Menu</a>
+      <a href="./contact.html" class="text-white">Contact</a>
+      <a href="./cart.html" class="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md">Cart</a>
+    </nav>
+  </header>
+
+  <main class="w-full px-6 py-10">
+    <h1 class="text-3xl font-[var(--heading-font)] mb-4">Contact & Visit</h1>
+    <div class="w-full grid grid-cols-1 md:grid-cols-2 gap-6">
+      <div class="bg-white p-6 rounded shadow">
+        <h2 class="font-[var(--heading-font)]">Get in touch</h2>
+        <p class="text-sm text-gray-600 mt-2">Questions? Catering inquiries? Reach out and we’ll get back to you shortly.</p>
+        <div class="mt-4">
+          <p class="text-sm"><strong>Address:</strong> 123 Artisan Lane, Coffee District</p>
+          <p class="text-sm mt-2"><strong>Hours:</strong> Daily 7:00 AM — 7:00 PM</p>
+          <p class="text-sm mt-2"><strong>Phone:</strong> (555) 123-4567</p>
+        </div>
+        <form class="mt-6 grid grid-cols-1 gap-3" onsubmit="event.preventDefault(); alert('Message submitted (demo)');">
+          <input type="text" placeholder="Your name" class="px-4 py-3 border rounded" required />
+          <input type="email" placeholder="Email" class="px-4 py-3 border rounded" required />
+          <textarea placeholder="Message" class="px-4 py-3 border rounded h-36"></textarea>
+          <button class="px-4 py-3 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow hover:scale-105 transition">Send</button>
+        </form>
+      </div>
+
+      <div class="bg-white p-6 rounded shadow">
+        <h2 class="font-[var(--heading-font)]">Directions</h2>
+        <p class="text-sm text-gray-600 mt-2">We’re located downtown near the Artisan Market. Order ahead and swing by for pickup.</p>
+        <div class="w-full h-64 bg-gray-100 rounded mt-4 flex items-center justify-center">
+          <img src="https://pixabay.com/get/g736ac584c7cdc8abcbabd3ab91e811b55156840a7f693a5b8c092ef57090a5738c151053d02c9c1397123b8be5eae881_640.jpg" alt="Storefront" class="object-cover w-full h-full rounded" />
+        </div>
+        <div class="mt-4 text-sm text-gray-600">Parking is available on the street and in the nearby lot.</div>
+      </div>
+    </div>
+  </main>
+
+  <footer class="w-full px-6 py-6 bg-[var(--primary-color)] text-white/80">
+    <div class="w-full flex items-center justify-between">
+      <div class="font-[var(--heading-font)]">Niyantri</div>
+      <div class="text-sm">Questions? Email hello@niyantri.example</div>
+    </div>
+  </footer>
+</body>
+</html>
