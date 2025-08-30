@@ -1,0 +1,159 @@
+<!-- https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@600;700&display=swap -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Niyantri — Premium Coffee</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-color: #1f2937; /* deep charcoal */
+      --secondary-color: #d4af37; /* gold */
+      --text-color: #111827; /* very dark gray */
+      --heading-font: 'Montserrat', sans-serif;
+      --body-font: 'Inter', sans-serif;
+    }
+    h1, h2, h3, h4, h5, h6 { font-family: var(--heading-font); }
+    body { font-family: var(--body-font); color: var(--text-color); }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-[var(--primary-color)] text-[var(--text-color)] font-[var(--body-font)]">
+  <!-- Header -->
+  <header class="w-full flex items-center justify-between px-6 py-5 bg-[var(--primary-color)]">
+    <div class="flex items-center gap-4">
+      <a href="./index.html" class="text-white flex items-center gap-3 no-underline">
+        <div class="w-10 h-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center shadow-md transform transition-transform duration-300 hover:scale-105">
+          <span class="text-[var(--primary-color)] font-[var(--heading-font)]">N</span>
+        </div>
+        <span class="text-white text-xl font-[var(--heading-font)]">Niyantri</span>
+      </a>
+    </div>
+
+    <nav class="flex items-center gap-4">
+      <a href="./index.html" class="text-white/80 hover:text-white transition">Home</a>
+      <a href="./menu.html" class="text-white/80 hover:text-white transition">Menu</a>
+      <a href="./contact.html" class="text-white/80 hover:text-white transition">Contact</a>
+      <a href="./cart.html" class="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md shadow hover:brightness-95 transition flex items-center gap-2">
+        Cart <span id="navCartCount" class="ml-1 text-sm font-medium bg-white/90 rounded-full px-2 py-0.5 text-[var(--primary-color)]">0</span>
+      </a>
+    </nav>
+  </header>
+
+  <!-- Hero -->
+  <main class="w-full">
+    <section class="w-full relative">
+      <div class="w-full h-[60vh] bg-cover bg-center flex items-center" style="background-image: url('https://images.pexels.com/photos/11896535/pexels-photo-11896535.jpeg?auto=compress&cs=tinysrgb&h=650&w=940')">
+        <div class="w-full bg-black/30 py-12 px-6">
+          <div class="max-w-full text-left">
+            <h1 class="text-4xl md:text-6xl text-white font-[var(--heading-font)] leading-tight">Niyantri — Artisan Coffee, Elevated</h1>
+            <p class="mt-4 text-white/90 text-lg md:text-xl max-w-2xl">Order ahead or in-store. Premium beans, sleek experience. Fast pickup and effortless online checkout with PayPay.</p>
+            <div class="mt-6 flex gap-4">
+              <a href="./menu.html" class="inline-block bg-[var(--secondary-color)] text-[var(--primary-color)] px-6 py-3 rounded-md font-medium shadow-lg transform transition hover:-translate-y-1 hover:scale-101">View Menu</a>
+              <a href="./contact.html" class="inline-block border border-white/30 text-white px-6 py-3 rounded-md transition hover:bg-white/5">Visit Us</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Featured items -->
+    <section class="w-full px-6 py-12">
+      <h2 class="text-white text-2xl font-[var(--heading-font)] mb-6">Featured</h2>
+      <div class="w-full grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+        <!-- Card 1 -->
+        <article class="w-full bg-white rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:shadow-2xl hover:-translate-y-2">
+          <img src="https://images.pexels.com/photos/16613916/pexels-photo-16613916.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Espresso" class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-lg font-[var(--heading-font)]">Espresso</h3>
+            <p class="text-sm text-gray-600 mt-2">Concentrated, bold, and perfectly pulled. The essence of coffee.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-[var(--primary-color)] font-semibold">$3.50</span>
+              <button class="add-to-cart px-4 py-2 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow hover:scale-105 transition" data-id="espresso" data-name="Espresso" data-price="3.5">Add</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 2 -->
+        <article class="w-full bg-white rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:shadow-2xl hover:-translate-y-2">
+          <img src="https://images.unsplash.com/photo-1724011415456-8a0d4d9e4381?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwzfHxhJTIwY3VwJTIwb2YlMjB2ZWx2ZXR5JTIwY2FwcHVjY2lubyUyMHdpdGglMjBmb2FtJTIwYXJ0JTIwb24lMjBhJTIwZGFyayUyMHRhYmxlfGVufDB8MHx8fDE3NTY1NTI2OTh8MA&ixlib=rb-4.1.0&q=80&w=1080" alt="Cappuccino" class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-lg font-[var(--heading-font)]">Cappuccino</h3>
+            <p class="text-sm text-gray-600 mt-2">Silky steamed milk layered over a robust espresso shot.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-[var(--primary-color)] font-semibold">$4.50</span>
+              <button class="add-to-cart px-4 py-2 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow hover:scale-105 transition" data-id="cappuccino" data-name="Cappuccino" data-price="4.5">Add</button>
+            </div>
+          </div>
+        </article>
+
+        <!-- Card 3 -->
+        <article class="w-full bg-white rounded-xl overflow-hidden shadow-lg transform transition duration-300 hover:shadow-2xl hover:-translate-y-2">
+          <img src="https://images.pexels.com/photos/2890201/pexels-photo-2890201.jpeg?auto=compress&cs=tinysrgb&h=650&w=940" alt="Cold Brew" class="w-full h-48 object-cover" />
+          <div class="p-5">
+            <h3 class="text-lg font-[var(--heading-font)]">Cold Brew</h3>
+            <p class="text-sm text-gray-600 mt-2">Slow-steeped for a smooth, low-acidity flavor — served chilled.</p>
+            <div class="mt-4 flex items-center justify-between">
+              <span class="text-[var(--primary-color)] font-semibold">$4.25</span>
+              <button class="add-to-cart px-4 py-2 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow hover:scale-105 transition" data-id="coldbrew" data-name="Cold Brew" data-price="4.25">Add</button>
+            </div>
+          </div>
+        </article>
+      </div>
+    </section>
+
+    <!-- Quick cart CTA -->
+    <section class="w-full px-6 py-8">
+      <div class="w-full bg-white/5 rounded-lg p-6 flex items-center justify-between">
+        <div>
+          <h3 class="text-white text-lg font-[var(--heading-font)]">Your cart is ready</h3>
+          <p class="text-white/80 text-sm mt-1">Add items and checkout quickly with PayPay.</p>
+        </div>
+        <div class="flex items-center gap-4">
+          <a href="./menu.html" class="px-4 py-2 text-white border border-white/20 rounded-md">Add More</a>
+          <a href="./cart.html" class="px-4 py-2 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow">Go to Cart</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="w-full px-6 py-6 bg-[var(--primary-color)] text-white/80">
+    <div class="w-full flex flex-col md:flex-row items-center justify-between">
+      <div class="mb-4 md:mb-0">
+        <strong class="font-[var(--heading-font)]">Niyantri</strong>
+        <div class="text-sm">Premium coffee & seamless ordering</div>
+      </div>
+      <div class="text-sm">© <span id="year"></span> Niyantri — All rights reserved</div>
+    </div>
+  </footer>
+
+  <script>
+    // Basic cart handling using localStorage — shared across pages
+    function getCart(){ return JSON.parse(localStorage.getItem('niyantri_cart')||'[]'); }
+    function setCart(c){ localStorage.setItem('niyantri_cart', JSON.stringify(c)); updateNavCount(); }
+    function updateNavCount(){ const c=getCart(); const count=c.reduce((s,i)=>s+i.qty,0); document.getElementById('navCartCount').textContent = count; }
+    document.addEventListener('DOMContentLoaded', ()=>{
+      // Wire up add buttons
+      document.querySelectorAll('.add-to-cart').forEach(btn=>{
+        btn.addEventListener('click', ()=>{
+          const id = btn.dataset.id; const name = btn.dataset.name; const price = parseFloat(btn.dataset.price);
+          const cart = getCart();
+          const found = cart.find(x=>x.id===id);
+          if(found){ found.qty += 1; } else { cart.push({id,name,price,qty:1}); }
+          setCart(cart);
+          // micro interaction
+          btn.classList.add('scale-95'); setTimeout(()=>btn.classList.remove('scale-95'),150);
+          // subtle toast
+          const toast = document.createElement('div');
+          toast.textContent = `${name} added to cart`;
+          toast.className = 'fixed bottom-6 right-6 bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded shadow-lg';
+          document.body.appendChild(toast);
+          setTimeout(()=>{ toast.remove(); }, 1800);
+        });
+      });
+      updateNavCount();
+      document.getElementById('year').textContent = new Date().getFullYear();
+    });
+  </script>
+</body>
+</html>
