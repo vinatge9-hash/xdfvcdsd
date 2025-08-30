@@ -1,0 +1,132 @@
+<!-- https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&family=Montserrat:wght@600;700&display=swap -->
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Cart — Niyantri</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    :root {
+      --primary-color: #1f2937;
+      --secondary-color: #d4af37;
+      --text-color: #111827;
+      --heading-font: 'Montserrat', sans-serif;
+      --body-font: 'Inter', sans-serif;
+    }
+    h1,h2,h3,h4,h5,h6 { font-family: var(--heading-font); }
+    body { font-family: var(--body-font); color: var(--text-color); }
+  </style>
+</head>
+<body class="w-full min-h-screen bg-gray-50 font-[var(--body-font)]">
+  <header class="w-full flex items-center justify-between px-6 py-5 bg-[var(--primary-color)] text-white">
+    <a href="./index.html" class="flex items-center gap-3 no-underline text-white">
+      <div class="w-10 h-10 rounded-full bg-[var(--secondary-color)] flex items-center justify-center"><span class="text-[var(--primary-color)] font-[var(--heading-font)]">N</span></div>
+      <span class="font-[var(--heading-font)]">Niyantri</span>
+    </a>
+    <nav class="flex items-center gap-4">
+      <a href="./index.html" class="text-white/80 hover:text-white transition">Home</a>
+      <a href="./menu.html" class="text-white/80 hover:text-white transition">Menu</a>
+      <a href="./contact.html" class="text-white/80 hover:text-white transition">Contact</a>
+      <a href="./cart.html" class="bg-[var(--secondary-color)] text-[var(--primary-color)] px-4 py-2 rounded-md">Cart <span id="navCartCount" class="ml-1 text-sm font-medium bg-white/90 rounded-full px-2 py-0.5 text-[var(--primary-color)]">0</span></a>
+    </nav>
+  </header>
+
+  <main class="w-full px-6 py-10">
+    <h1 class="text-3xl font-[var(--heading-font)] mb-4">Your Cart</h1>
+    <div id="cartArea" class="w-full flex flex-col gap-6"></div>
+
+    <div class="w-full mt-8 flex items-center justify-end gap-6">
+      <div class="text-lg">Total: <span id="totalPrice" class="font-[var(--heading-font)] text-xl">$0.00</span></div>
+      <button id="paypayBtn" class="px-6 py-3 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded-md shadow-lg transform transition hover:scale-105">Pay with PayPay</button>
+    </div>
+  </main>
+
+  <!-- Mock PayPay modal -->
+  <div id="ppModal" class="fixed inset-0 bg-black/50 hidden items-center justify-center">
+    <div class="bg-white rounded-lg w-[90%] md:w-2/5 p-6">
+      <h2 class="text-xl font-[var(--heading-font)] mb-3">PayPay Checkout</h2>
+      <p class="text-sm text-gray-600 mb-4">This is a mock PayPay flow for demonstration. Replace this with real PayPay SDK/API for production integration.</p>
+      <div class="flex items-center justify-end gap-4">
+        <button id="ppCancel" class="px-4 py-2 rounded border">Cancel</button>
+        <button id="ppConfirm" class="px-4 py-2 bg-[var(--secondary-color)] text-[var(--primary-color)] rounded">Confirm Payment</button>
+      </div>
+    </div>
+  </div>
+
+  <footer class="w-full px-6 py-6 bg-[var(--primary-color)] text-white/80 mt-12">
+    <div class="w-full flex items-center justify-between">
+      <div class="font-[var(--heading-font)]">Niyantri</div>
+      <div class="text-sm">Thank you for supporting local roasters</div>
+    </div>
+  </footer>
+
+  <script>
+    function getCart(){ return JSON.parse(localStorage.getItem('niyantri_cart')||'[]'); }
+    function setCart(c){ localStorage.setItem('niyantri_cart', JSON.stringify(c)); updateNavCount(); renderCart(); }
+    function updateNavCount(){ const c=getCart(); const count=c.reduce((s,i)=>s+i.qty,0); document.getElementById('navCartCount').textContent = count; }
+
+    function renderCart(){
+      const area = document.getElementById('cartArea'); area.innerHTML = '';
+      const cart = getCart();
+      if(cart.length===0){ area.innerHTML = '<div class="w-full bg-white p-6 rounded shadow">Your cart is empty. <a href="./menu.html" class="text-[var(--secondary-color)]"> Browse the menu</a></div>'; document.getElementById('totalPrice').textContent = '$0.00'; return; }
+
+      cart.forEach(item=>{
+        const row = document.createElement('div');
+        row.className = 'w-full bg-white rounded-lg p-4 flex items-center justify-between shadow';
+        row.innerHTML = `
+          <div class=\"flex items-center gap-4\"> 
+            <img src=\"https://images.unsplash.com/photo-1670217470538-e442d7d5ec10?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3ODkyNDZ8MHwxfHNlYXJjaHwzfHwlMjQlN0JpdGVtLm5hbWUlN0QlMjBjdXAlMjBvbiUyMHRhYmxlJTJDJTIwcHJlbWl1bSUyMGNvbXBvc2l0aW9ufGVufDB8MHx8fDE3NTY1NTI3MDd8MA&ixlib=rb-4.1.0&q=80&w=1080\" alt=\"${item.name}\" class=\"w-20 h-20 object-cover rounded\" />
+            <div>
+              <div class=\"font-[var(--heading-font)]\">${item.name}</div>
+              <div class=\"text-sm text-gray-500\">$${item.price.toFixed(2)} each</div>
+            </div>
+          </div>
+          <div class=\"flex items-center gap-3\">
+            <button class=\"dec px-3 py-1 bg-gray-100 rounded\">−</button>
+            <div class=\"px-3 py-1 bg-gray-50 rounded\">${item.qty}</div>
+            <button class=\"inc px-3 py-1 bg-gray-100 rounded\">+</button>
+            <div class=\"ml-6 font-[var(--heading-font)]\">$${(item.price*item.qty).toFixed(2)}</div>
+            <button class=\"remove ml-4 text-sm text-red-500\">Remove</button>
+          </div>
+        `;
+        // attach handlers
+        row.querySelector('.inc').addEventListener('click', ()=>{ item.qty+=1; setCart(cart); });
+        row.querySelector('.dec').addEventListener('click', ()=>{ if(item.qty>1){ item.qty-=1; setCart(cart);} else { if(confirm('Remove item?')){ const idx = cart.findIndex(x=>x.id===item.id); cart.splice(idx,1); setCart(cart); } }});
+        row.querySelector('.remove').addEventListener('click', ()=>{ if(confirm('Remove item?')){ const idx = cart.findIndex(x=>x.id===item.id); cart.splice(idx,1); setCart(cart); }});
+        area.appendChild(row);
+      });
+      const total = cart.reduce((s,i)=>s + i.price*i.qty,0);
+      document.getElementById('totalPrice').textContent = `$${total.toFixed(2)}`;
+    }
+
+    document.addEventListener('DOMContentLoaded', ()=>{
+      updateNavCount(); renderCart();
+
+      const ppBtn = document.getElementById('paypayBtn');
+      const ppModal = document.getElementById('ppModal');
+      const ppCancel = document.getElementById('ppCancel');
+      const ppConfirm = document.getElementById('ppConfirm');
+
+      ppBtn.addEventListener('click', ()=>{
+        const cart = getCart(); if(cart.length===0){ alert('Your cart is empty.'); return; }
+        // show mock modal
+        ppModal.classList.remove('hidden'); ppModal.classList.add('flex');
+      });
+      ppCancel.addEventListener('click', ()=>{ ppModal.classList.add('hidden'); ppModal.classList.remove('flex'); });
+
+      ppConfirm.addEventListener('click', ()=>{
+        // Mock processing animation
+        ppConfirm.disabled = true; ppConfirm.textContent = 'Processing…';
+        setTimeout(()=>{
+          alert('Payment successful (mock). Thank you for your order!');
+          localStorage.removeItem('niyantri_cart'); updateNavCount(); renderCart();
+          ppModal.classList.add('hidden'); ppModal.classList.remove('flex');
+          ppConfirm.disabled = false; ppConfirm.textContent = 'Confirm Payment';
+        }, 1400);
+      });
+
+    });
+  </script>
+</body>
+</html>
